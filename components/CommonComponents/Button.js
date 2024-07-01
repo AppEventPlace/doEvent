@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet, Pressable, Text } from "react-native";
+import { StyleSheet, Pressable, Text, View } from "react-native";
 
 // --> Importar estilos comunes
+import { Colors } from "../CommonStyles/CommonStyles";
 import { BackCheckron } from "../CommonStyles/CommonStyles";
 
 import { Text_Button } from "../CommonStyles/CommonButtonStyles";
@@ -16,14 +17,15 @@ Componente  Diseñado renderizar botones de forma predeterminada.
 - Icon:     Nombre del Icono a mostrar dentro del botón (Usar IconSvg)
 ---------------------------------------------------------------------------*/
 export default function Button({
-  label,
   theme,
-  onPress,
+  label,
   color,
-  disabled,
+  onPress,
   Icon,
   IconColor,
+  disabled,
 }) {
+  const styler = getStyles(color);
   switch (theme) {
     // --> Botón principal
     case "StyleBoton":
@@ -31,7 +33,7 @@ export default function Button({
         <Pressable
           style={({ pressed }) => [
             styles.button,
-            { backgroundColor: pressed ? "#6866D4" : color },
+            { backgroundColor: pressed ? Colors.NightBlue_800 : color },
           ]}
           onPress={onPress}
         >
@@ -82,6 +84,35 @@ export default function Button({
         </Pressable>
       );
 
+    case "TexTerms":
+      return (
+        <Pressable style={{ width: "100%" }} onPress={onPress}>
+          <Text style={styler.StyleButtonLabel_3}>{label}</Text>
+        </Pressable>
+      );
+
+    case "Checked":
+      return (
+        <View
+          style={[
+            styles.StyleBoton,
+            {
+              backgroundColor: disabled
+                ? Colors.NightBlue_600
+                : Colors.NightBlue_300,
+            },
+          ]}
+        >
+          <Pressable
+            style={styles.button}
+            onPress={onPress}
+            disabled={!disabled}
+          >
+            <Text style={styles.StyleButtonLabel_1}>{label}</Text>
+          </Pressable>
+        </View>
+      );
+
     // --> Por defecto
     default:
       return (
@@ -94,8 +125,26 @@ export default function Button({
       );
   }
 }
+const getStyles = (color) => {
+  return StyleSheet.create({
+    StyleButtonLabel_3: {
+      color: color || Text_Button.StyleButtonLabel_3,
+      fontSize: Text_Button.FontSizesButton,
+      fontWeight: "500",
+      lineHeight: 19,
+      textDecorationLine: "underline",
+    },
+  });
+};
 
 const styles = StyleSheet.create({
+  StyleBoton: {
+    width: "100%",
+    height: 43,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   button: {
     minWidth: "100%",
     height: "100%",

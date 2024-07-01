@@ -9,7 +9,12 @@ export const Colors = {
   Placeholder: "#72767A",
   Line: "#A1A5A9",
   // -->
+  NightBlue_200: "#E9EAFE",
+  NightBlue_300: "#D0D4FC",
+  NightBlue_400: "#B5BBFB",
+  NightBlue_500: "#949DF9",
   NightBlue_600: "#6979F8",
+  NightBlue_700: "#5E6CDE",
   NightBlue_800: "#515EC0",
   // --> Azul
   Azul_Facebook: "#1877F2",

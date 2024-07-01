@@ -16,12 +16,12 @@ const useValidation = (initialState) => {
       regex: /^[0-9]*$/,
       message: "El número de celular debe ser numérico",
     },
-    correo: {
+    email: {
       regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
       message: "Ingrese un correo electrónico válido",
     },
-    contrasena: passwordValidation,
-    confirmarContrasena: passwordValidation,
+    contraseña: passwordValidation,
+    confirmarContraseña: passwordValidation,
     default: {
       regex: /^[a-zA-ZñÑ\s]*$/,
       message: "Este campo solo puede contener letras",
@@ -33,11 +33,11 @@ const useValidation = (initialState) => {
 
     for (let key in state) {
       const { regex, message } = validations[key] || validations.default;
-      if (key === "correo") {
+      if (key === "email") {
         if (state[key] && !regex.test(state[key])) {
           newErrors[key] = message;
         }
-      } else if (key === "contrasena" || key === "confirmarContrasena") {
+      } else if (key === "contraseña" || key === "confirmarContraseña") {
         if (state[key] && !regex.test(state[key])) {
           newErrors[key] = message;
         }
@@ -49,10 +49,10 @@ const useValidation = (initialState) => {
     }
 
     if (
-      state.confirmarContrasena &&
-      state.contrasena !== state.confirmarContrasena
+      state.confirmarContraseña &&
+      state.contraseña !== state.confirmarContraseña
     ) {
-      newErrors.confirmarContrasena =
+      newErrors.confirmarContraseña =
         "La contraseña y la confirmación de la contraseña deben ser iguales";
     }
 
@@ -64,12 +64,17 @@ const useValidation = (initialState) => {
     validarCampos();
   }, [state, validarCampos]);
 
+  const getStateAsJson = () => {
+    return JSON.stringify(state);
+  };
+
   return {
     state,
     setState,
     errors,
     setErrors,
     validarCampos,
+    getStateAsJson,
   };
 };
 

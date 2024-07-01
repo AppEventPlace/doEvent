@@ -9,6 +9,11 @@ const CommonSpacingStyles = StyleSheet.create({
     alignSelf: "center",
     paddingHorizontal: 16,
   },
+  VerticalSpacing_16: {
+    width: "100%",
+    rowGap: 16,
+    alignSelf: "center",
+  },
   VerticalSpacing_24: {
     width: "100%",
     rowGap: 24,
@@ -22,6 +27,11 @@ const CommonSpacingStyles = StyleSheet.create({
   VerticalSpacing_40: {
     width: "100%",
     rowGap: 40,
+    alignSelf: "center",
+  },
+  VerticalSpacing_56: {
+    width: "100%",
+    rowGap: 56,
     alignSelf: "center",
   },
 });

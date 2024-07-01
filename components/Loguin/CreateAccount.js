@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   SafeAreaView,
@@ -7,7 +7,6 @@ import {
   View,
   Text,
   TextInput,
-  Button,
 } from "react-native";
 
 import CommonStyles, { Colors, TexColor } from "../CommonStyles/CommonStyles";
@@ -19,19 +18,21 @@ import IconSvg from "../../assets/IconSvg";
 import AnotherLoginMethod from "../CommonComponents/AnotherLoginMethod";
 
 import useValidation from "./ValidationCreateAccount";
+import CheckedTerms from "../CommonComponents/CheckedTerms";
+import CreateUser from "../../APIs/CreateUser";
 
 const CreateAccount = ({ navigation }) => {
   const initialState = {
-    nombres: "",
-    apellidos: "",
+    nombre: "",
+    apellido: "",
     celular: "",
-    correo: "",
-    contrasena: "",
-    confirmarContrasena: "",
+    email: "",
+    contraseña: "",
+    confirmarContraseña: "",
     // Puedes agregar aquí los campos restantes...
   };
 
-  const { state, setState, errors, validarCampos, setErrors } =
+  const { state, setState, errors, validarCampos, setErrors, getStateAsJson } =
     useValidation(initialState);
 
   const handleChange = (name, value) => {
@@ -66,7 +67,10 @@ const CreateAccount = ({ navigation }) => {
 
     const errorCount = Object.keys(newErrors).length;
     console.log("Número de errores:", errorCount);
-    console.log("Datos enviados:", state);
+    const stateJson = getStateAsJson();
+    //console.log("Datos enviados:", stateJson);
+
+    CreateUser(stateJson);
   };
 
   return (
@@ -106,16 +110,16 @@ const CreateAccount = ({ navigation }) => {
                 <Text style={CommonStyles.TexContainer}>Nombre(s)</Text>
                 <TextInput
                   placeholder="Ingresa tu(s) nombre(s)"
-                  value={state.nombres}
-                  onChangeText={(value) => handleChange("nombres", value)}
+                  value={state.nombre}
+                  onChangeText={(value) => handleChange("nombre", value)}
                   style={[
                     CommonStyles.TexInput,
-                    errors.nombres && styles.inputError,
+                    errors.nombre && styles.inputError,
                     ,
                   ]}
                 />
-                {errors.nombres ? (
-                  <Text style={CommonTextStyles.Body_S}>{errors.nombres}</Text>
+                {errors.nombre ? (
+                  <Text style={CommonTextStyles.Body_S}>{errors.nombre}</Text>
                 ) : null}
               </View>
 
@@ -123,17 +127,15 @@ const CreateAccount = ({ navigation }) => {
                 <Text style={CommonStyles.TexContainer}>Apellido(s)</Text>
                 <TextInput
                   placeholder="Ingresa tu(s) apellido(s)"
-                  value={state.apellidos}
-                  onChangeText={(value) => handleChange("apellidos", value)}
+                  value={state.apellido}
+                  onChangeText={(value) => handleChange("apellido", value)}
                   style={[
                     CommonStyles.TexInput,
-                    errors.apellidos && styles.inputError,
+                    errors.apellido && styles.inputError,
                   ]}
                 />
-                {errors.apellidos ? (
-                  <Text style={CommonTextStyles.Body_S}>
-                    {errors.apellidos}
-                  </Text>
+                {errors.apellido ? (
+                  <Text style={CommonTextStyles.Body_S}>{errors.apellido}</Text>
                 ) : null}
               </View>
 
@@ -151,7 +153,7 @@ const CreateAccount = ({ navigation }) => {
                     placeholder="YYY/MM/DD"
                     value={state.fechaNacimiento}
                     onChangeText={(value) =>
-                      handleChange("fechaNacimiento ", value)
+                      handleChange("fechaNacimiento", value)
                     }
                     style={CommonStyles.TexInput_1}
                   />
@@ -188,15 +190,15 @@ const CreateAccount = ({ navigation }) => {
                 </Text>
                 <TextInput
                   placeholder="Ingresa tu correo electrónico"
-                  value={state.correo}
-                  onChangeText={(value) => handleChange("correo", value)}
+                  value={state.email}
+                  onChangeText={(value) => handleChange("email", value)}
                   style={[
                     CommonStyles.TexInput,
-                    errors.correo && styles.inputError,
+                    errors.email && styles.inputError,
                   ]}
                 />
-                {errors.correo ? (
-                  <Text style={CommonTextStyles.Body_S}>{errors.correo}</Text>
+                {errors.email ? (
+                  <Text style={CommonTextStyles.Body_S}>{errors.email}</Text>
                 ) : null}
               </View>
 
@@ -204,15 +206,25 @@ const CreateAccount = ({ navigation }) => {
                 <Text style={CommonStyles.TexContainer}>
                   Nombre de usuario (Opcional)
                 </Text>
-                <View style={CommonStyles.SubContainer_2}>
+                <View
+                  style={[
+                    CommonStyles.SubContainer_2,
+                    errors.usuario && styles.inputError,
+                  ]}
+                >
                   <TextInput
                     placeholder="Ingresa un nombre de usuario"
+                    value={state.usuario}
+                    onChangeText={(value) => handleChange("usuario", value)}
                     style={CommonStyles.TexInput_1}
                   />
                   <View style={CommonStyles.SubContainer_3}>
                     <IconSvg theme={"Check"}></IconSvg>
                   </View>
                 </View>
+                {errors.usuario ? (
+                  <Text style={CommonTextStyles.Body_S}>{errors.usuario}</Text>
+                ) : null}
               </View>
 
               <View style={CommonStyles.SubContainer}>
@@ -220,22 +232,23 @@ const CreateAccount = ({ navigation }) => {
                 <View
                   style={[
                     CommonStyles.SubContainer_2,
-                    errors.contrasena && styles.inputError,
+                    errors.contraseña && styles.inputError,
                   ]}
                 >
                   <TextInput
                     placeholder="Ingresa tu contraseña"
-                    value={state.contrasena}
-                    onChangeText={(value) => handleChange("contrasena", value)}
+                    value={state.contraseña}
+                    onChangeText={(value) => handleChange("contraseña", value)}
+                    secureTextEntry={true}
                     style={CommonStyles.TexInput_1}
                   />
                   <View style={CommonStyles.SubContainer_3}>
                     <IconSvg theme={"Check"}></IconSvg>
                   </View>
                 </View>
-                {errors.contrasena ? (
+                {errors.contraseña ? (
                   <Text style={CommonTextStyles.Body_S}>
-                    {errors.contrasena}
+                    {errors.contraseña}
                   </Text>
                 ) : null}
               </View>
@@ -247,34 +260,31 @@ const CreateAccount = ({ navigation }) => {
                 <View
                   style={[
                     CommonStyles.SubContainer_2,
-                    errors.confirmarContrasena && styles.inputError,
+                    errors.confirmarContraseña && styles.inputError,
                   ]}
                 >
                   <TextInput
                     placeholder="Confirma tu contraseña"
-                    value={state.confirmarContrasena}
+                    value={state.confirmarContraseña}
                     onChangeText={(value) =>
-                      handleChange("confirmarContrasena", value)
+                      handleChange("confirmarContraseña", value)
                     }
+                    secureTextEntry={true}
                     style={CommonStyles.TexInput_1}
                   />
                   <View style={CommonStyles.SubContainer_3}>
                     <IconSvg theme={"Check"}></IconSvg>
                   </View>
                 </View>
-                {errors.confirmarContrasena ? (
+                {errors.confirmarContraseña ? (
                   <Text style={CommonTextStyles.Body_S}>
-                    {errors.confirmarContrasena}
+                    {errors.confirmarContraseña}
                   </Text>
                 ) : null}
               </View>
-
-              {/* <Button title="Registrarse" onPress={handleSubmit} /> */}
-              <Button
-                title="Registrarse"
-                onPress={() => navigation.navigate("TermsAndConditions")}
-              />
             </View>
+            <CheckedTerms navigation={navigation} onPres={handleSubmit} />
+            {/* <Button title="Registrarse" onPress={handleSubmit} /> */}
           </View>
         </View>
       </ScrollView>
