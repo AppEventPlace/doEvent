@@ -15,6 +15,7 @@ Componente  Diseñado renderizar botones de forma predeterminada.
 -	color: 		Define el color de fondo 
 -	onPress:	Acción  al oprimir el botón 
 - Icon:     Nombre del Icono a mostrar dentro del botón (Usar IconSvg)
+- disabled: Estado del botón tru = activo o false = inactivo
 ---------------------------------------------------------------------------*/
 export default function Button({
   theme,

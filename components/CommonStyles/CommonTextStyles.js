@@ -20,6 +20,15 @@ const CommonTextStyles = StyleSheet.create({
     letterSpacing: 0.005,
   },
 
+  // --> Heding_14
+  Heding_H14: {
+    fontWeight: "700",
+    fontSize: FontSizes.megaLarge,
+    lineHeight: 41,
+    color: Colors.Negro,
+    letterSpacing: 0.01,
+  },
+
   // --> Body-S;
   Body_S: {
     fontWeight: "500",

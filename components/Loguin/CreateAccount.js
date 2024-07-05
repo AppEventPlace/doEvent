@@ -21,6 +21,8 @@ import useValidation from "./ValidationCreateAccount";
 import CheckedTerms from "../CommonComponents/CheckedTerms";
 import CreateUser from "../../APIs/CreateUser";
 
+import { LinearProgress } from "@rneui/themed";
+
 const CreateAccount = ({ navigation }) => {
   const initialState = {
     nombre: "",
@@ -73,24 +75,39 @@ const CreateAccount = ({ navigation }) => {
     CreateUser(stateJson);
   };
 
+  const Progress = 0.4;
+
   return (
     <SafeAreaView
       style={[CommonStyles.AreaView, { backgroundColor: Colors.Primary }]}
     >
       <View style={CommonSpacingStyles.VerticalSpacing_10_16}>
         <BackCheckron navigation={navigation} />
-        <View style={[CommonStyles.ProgressBar, { marginBottom: 12 }]}>
-          <IconSvg theme="ProgressBar" progress="90" />
-        </View>
       </View>
       <ScrollView style={CommonStyles.ScrollView}>
         <View style={CommonStyles.FullContainer}>
-          <Text style={[CommonTextStyles.Heding_H5, { marginTop: 12 }]}>
-            Crear cuenta
-          </Text>
-          <Text style={[CommonTextStyles.SemiBold_L, { marginTop: 16 }]}>
-            Crear la cuenta con tus redes o ingresar tu correo electrónico
-          </Text>
+          <View style={[CommonStyles.ProgressBar, { marginVertical: 12 }]}>
+            <LinearProgress
+              style={{
+                marginVertical: 10,
+                borderRadius: 20,
+                height: 4,
+                flex: 1,
+              }}
+              value={Progress}
+              color="#515EC0"
+              variant="determinate"
+              trackColor="#E9EAFE"
+              animation={{ duration: 1500 }}
+            />
+            <Text>{Progress * 100}%</Text>
+          </View>
+          <View style={CommonSpacingStyles.VerticalSpacing_16}>
+            <Text style={CommonTextStyles.Heding_H5}>Crear cuenta</Text>
+            <Text style={CommonTextStyles.SemiBold_L}>
+              Crear la cuenta con tus redes o ingresar tu correo electrónico
+            </Text>
+          </View>
           <View
             style={[
               CommonSpacingStyles.VerticalSpacing_32,

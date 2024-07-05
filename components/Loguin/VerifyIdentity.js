@@ -53,16 +53,16 @@ const VerifyIdentity = ({ navigation }) => {
                   />
                 ))}
               </View>
-              <Text style={CommonTextStyles.Body_S}>
-                Solicitar nuevo código
-              </Text>
+              <View style={styles.Height}>
+                <Button theme="Generico" label="Solicitar nuevo código" />
+              </View>
             </View>
             <View style={CommonStyles.BotonContainer}>
               <Button
                 label="Continuar"
                 color={Color_Button.Default}
                 theme="StyleBoton"
-                onPress={() => navigation.navigate("Successful")}
+                onPress={() => navigation.navigate("Gustos")}
               />
             </View>
           </View>
@@ -89,5 +89,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     borderBottomColor: "#A1A5A9",
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  Height: {
+    height: 25,
   },
 });

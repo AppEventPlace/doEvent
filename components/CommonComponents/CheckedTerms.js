@@ -34,7 +34,7 @@ const CheckedTerms = ({ navigation, onPres }) => {
   };
 
   return (
-    <View style={CommonSpacingStyles.VerticalSpacing_24}>
+    <View style={CommonSpacingStyles.VerticalSpacing_40}>
       <View style={styles.Container}>
         <CheckBox
           checked={isChecked}
@@ -59,7 +59,7 @@ const CheckedTerms = ({ navigation, onPres }) => {
       <View style={CommonStyles.BotonContainer}>
         <Button
           theme="Checked"
-          label="Iniciar sesión"
+          label="Continuar"
           disabled={isChecked}
           color={Color_Button.Default}
           onPress={() => {

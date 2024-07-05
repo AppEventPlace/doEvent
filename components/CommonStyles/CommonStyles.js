@@ -39,6 +39,7 @@ export const FontSizes = {
   medium_19: 19,
   large: 20,
   extraLarge: 24,
+  megaLarge: 34,
 };
 
 // Color BackCheckron
@@ -196,8 +197,10 @@ const CommonStyles = StyleSheet.create({
   // --> Contenedor parala  barra de progreso
   ProgressBar: {
     width: "100%",
-    height: 10,
+    height: 16,
     alignItems: "center",
+    flexDirection: "row",
+    columnGap: 8,
   },
 });
 
