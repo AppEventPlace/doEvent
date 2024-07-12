@@ -65,6 +65,15 @@ export default function Button({
         </Pressable>
       );
 
+    // --> ImagePicker
+    case "ImagePicker":
+      return (
+        <Pressable
+          style={[styles.button, { position: "absolute" }]}
+          onPress={onPress}
+        ></Pressable>
+      );
+
     // --> Genérico: Se adapta al contenedor principal, usar este estilo de botón , en caracteres  que realicen  alguna acción.
     case "Generico":
       return (

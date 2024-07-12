@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   SafeAreaView,
@@ -9,21 +9,66 @@ import {
   TextInput,
 } from "react-native";
 
-import CommonStyles, { Colors, TexColor } from "../CommonStyles/CommonStyles";
-import CommonSpacingStyles from "../CommonStyles/CommonSpacingStyles";
-import CommonTextStyles from "../CommonStyles/CommonTextStyles";
+// --> Importar ImagePicker
+import * as ImagePicker from "expo-image-picker"; // Lib para el acceso a la interfaz de usuario
+import ImageViewer from "../../components/CommonComponents/ImageViewer";
 
-import BackCheckron from "../CommonComponents/BackCheckron";
+// --> Importar Estilos comunes
+import CommonStyles, {
+  Colors,
+  TexColor,
+} from "../../components/CommonStyles/CommonStyles";
+import CommonSpacingStyles from "../../components/CommonStyles/CommonSpacingStyles";
+import CommonTextStyles from "../../components/CommonStyles/CommonTextStyles";
+
+// --> Importar Componentes comunes
 import IconSvg from "../../assets/IconSvg";
-import AnotherLoginMethod from "../CommonComponents/AnotherLoginMethod";
+import Button from "../../components/CommonComponents/Button";
+import CheckedTerms from "../../components/CommonComponents/CheckedTerms";
+import BackCheckron from "../../components/CommonComponents/BackCheckron";
+import AnotherLoginMethod from "../../components/CommonComponents/AnotherLoginMethod";
 
+// --> Importar Validación de estructura
 import useValidation from "./ValidationCreateAccount";
-import CheckedTerms from "../CommonComponents/CheckedTerms";
+
+// --> Importar Validación de estructura
 import CreateUser from "../../APIs/CreateUser";
 
+// --> Importar Api para registrar o crear un nuevo Usuario
 import { LinearProgress } from "@rneui/themed";
 
+/*--------    FondImage= Imagen inicial, Requerida para usar ImageViewer   --------*/
+const FondImage = require("../../assets/Seleccionar_Foto.jpg");
+/*----------------------------------------------------------------------------------*/
+
+/*----------------------------  CreateAccount  -----------------------------
+Componente Diseñado para crear un formulario de registro de nuevos usuarios 
+---------------------------------------------------------------------------*/
 const CreateAccount = ({ navigation }) => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  /*----------------------------------------------------------------------------------
+  Componente ImageViewer permite el acceso a la interfaz de usuario para seleccionar 
+  la imagen de perfil. 
+  ----------------------------------------------------------------------------------*/
+  const pickImageAsync = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      //Opciones del selector de imágenes a launchImageLibraryAsync()
+      allowsEditing: true,
+      quality: 1,
+    });
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
+    }
+    //Si el usuario no elige una imagen, muestra una alerta.
+    else {
+      alert("No seleccionaste ninguna imagen.");
+    }
+  };
+
+  /*----------------------------------------------------------------------------------
+  Inicializar variables para validar la estructura y obligatoriedad del campo 
+  ----------------------------------------------------------------------------------*/
   const initialState = {
     nombre: "",
     apellido: "",
@@ -31,7 +76,7 @@ const CreateAccount = ({ navigation }) => {
     email: "",
     contraseña: "",
     confirmarContraseña: "",
-    // Puedes agregar aquí los campos restantes...
+    //  Agregar aquí los campos restantes...
   };
 
   const { state, setState, errors, validarCampos, setErrors, getStateAsJson } =
@@ -70,7 +115,6 @@ const CreateAccount = ({ navigation }) => {
     const errorCount = Object.keys(newErrors).length;
     console.log("Número de errores:", errorCount);
     const stateJson = getStateAsJson();
-    //console.log("Datos enviados:", stateJson);
 
     CreateUser(stateJson);
   };
@@ -86,18 +130,13 @@ const CreateAccount = ({ navigation }) => {
       </View>
       <ScrollView style={CommonStyles.ScrollView}>
         <View style={CommonStyles.FullContainer}>
-          <View style={[CommonStyles.ProgressBar, { marginVertical: 12 }]}>
+          <View style={[CommonStyles.ViewProgressBar, { marginVertical: 12 }]}>
             <LinearProgress
-              style={{
-                marginVertical: 10,
-                borderRadius: 20,
-                height: 4,
-                flex: 1,
-              }}
+              style={CommonStyles.ProgressBar}
               value={Progress}
-              color="#515EC0"
+              color={Colors.NightBlue_800}
               variant="determinate"
-              trackColor="#E9EAFE"
+              trackColor={Colors.NightBlue_200}
               animation={{ duration: 1500 }}
             />
             <Text>{Progress * 100}%</Text>
@@ -123,6 +162,24 @@ const CreateAccount = ({ navigation }) => {
               <View style={CommonStyles.Underscore} />
             </View>
             <View style={CommonStyles.container}>
+              <View
+                style={[
+                  {
+                    marginTop: 24,
+                    borderWidth: 1,
+                  },
+                ]}
+              >
+                <ImageViewer
+                  //Pase el URI de la imagen seleccionada al componente ImageViewer.
+                  placeholderImageSource={FondImage}
+                  selectedImage={selectedImage}
+                  ancho={96}
+                  alto={96}
+                ></ImageViewer>
+                <Button theme="ImagePicker" onPress={pickImageAsync} />
+              </View>
+
               <View style={CommonStyles.SubContainer}>
                 <Text style={CommonStyles.TexContainer}>Nombre(s)</Text>
                 <TextInput

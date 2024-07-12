@@ -10,13 +10,16 @@ import {
 } from "react-native";
 import { LinearProgress } from "@rneui/themed";
 
-import CommonStyles, { Colors, TexColor } from "../CommonStyles/CommonStyles";
-import CommonSpacingStyles from "../CommonStyles/CommonSpacingStyles";
-import CommonTextStyles from "../CommonStyles/CommonTextStyles";
-import { Color_Button } from "../CommonStyles/CommonButtonStyles";
+import CommonStyles, {
+  Colors,
+  TexColor,
+} from "../../components/CommonStyles/CommonStyles";
+import CommonSpacingStyles from "../../components/CommonStyles/CommonSpacingStyles";
+import CommonTextStyles from "../../components/CommonStyles/CommonTextStyles";
+import { Color_Button } from "../../components/CommonStyles/CommonButtonStyles";
 
-import BackCheckron from "../CommonComponents/BackCheckron";
-import Button from "../CommonComponents/Button";
+import BackCheckron from "../../components/CommonComponents/BackCheckron";
+import Button from "../../components/CommonComponents/Button";
 
 const Gustos = ({ navigation }) => {
   const Progress = 0.4;

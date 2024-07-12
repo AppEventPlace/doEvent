@@ -5,12 +5,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 /*---------------------------------------------------------------------------
 Importar componentes propios requeridos para el Loguin / creación de usuario
 ---------------------------------------------------------------------------*/
-import Loguin from "../Loguin/Login";
-import CreateAccount from "../Loguin/CreateAccount";
-import TermsAndConditions from "../Loguin/TermsAndConditions";
-import VerifyIdentity from "../Loguin/VerifyIdentity";
-import Gustos from "../Loguin/Gustos";
-import Successful from "../Loguin/Successful";
+import Loguin from "../../Screens/Loguin/Login";
+import CreateAccount from "../../Screens/Loguin/CreateAccount";
+import TermsAndConditions from "../../Screens/Loguin/TermsAndConditions";
+import VerifyIdentity from "../../Screens/Loguin/VerifyIdentity";
+import Gustos from "../../Screens/Loguin/Gustos";
+import Successful from "../../Screens/Loguin/Successful";
 
 const Stack = createStackNavigator();
 

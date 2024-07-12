@@ -129,14 +129,15 @@ const CommonStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  SubContainer_4: {
-    width: 75,
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    borderBottomColor: Colors.Line,
-    borderBottomWidth: (StyleSheet.hairlineWidth = 1),
-  },
+
+  // SubContainer_4: {
+  //   width: 75,
+  //   height: "100%",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   borderBottomColor: Colors.Line,
+  //   borderBottomWidth: (StyleSheet.hairlineWidth = 1),
+  // },
 
   // --> Stilo  de Texto - Titulo:  Usar en conjunto con SubContainer
   TexContainer: {
@@ -195,12 +196,18 @@ const CommonStyles = StyleSheet.create({
   },
 
   // --> Contenedor parala  barra de progreso
-  ProgressBar: {
+  ViewProgressBar: {
     width: "100%",
     height: 16,
     alignItems: "center",
     flexDirection: "row",
     columnGap: 8,
+  },
+  ProgressBar: {
+    marginVertical: 10,
+    borderRadius: 20,
+    height: 4,
+    flex: 1,
   },
 });
 

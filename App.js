@@ -1,5 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 
+import MenuMovil from "./Screens/NavigationMenu/Menu";
 import StackLoguinAccess from "./components/StackNavigation/StackLoguinAccess";
 
 export default function App() {
@@ -11,7 +12,7 @@ export default function App() {
     //   </View>
     // </SafeAreaView>
     <NavigationContainer>
-      <StackLoguinAccess />
+      <MenuMovil />
     </NavigationContainer>
   );
 }

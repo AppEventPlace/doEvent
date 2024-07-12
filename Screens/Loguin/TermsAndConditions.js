@@ -1,11 +1,13 @@
 import { SafeAreaView, ScrollView, StyleSheet, View, Text } from "react-native";
 
-import CommonStyles, { Colors } from "../CommonStyles/CommonStyles";
-import CommonTextStyles from "../CommonStyles/CommonTextStyles";
-import CommonSpacingStyles from "../CommonStyles/CommonSpacingStyles";
-import { Color_Button } from "../CommonStyles/CommonButtonStyles";
+import CommonStyles, {
+  Colors,
+} from "../../components/CommonStyles/CommonStyles";
+import CommonTextStyles from "../../components/CommonStyles/CommonTextStyles";
+import CommonSpacingStyles from "../../components/CommonStyles/CommonSpacingStyles";
+import { Color_Button } from "../../components/CommonStyles/CommonButtonStyles";
 
-import Button from "../CommonComponents/Button";
+import Button from "../../components/CommonComponents/Button";
 
 const TermsAndConditions = ({ navigation }) => {
   return (

@@ -1,11 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, SafeAreaView, TextInput } from "react-native";
 
-import CommonStyles, { Colors, TexColor } from "../CommonStyles/CommonStyles";
-import { Color_Button } from "../CommonStyles/CommonButtonStyles";
+import CommonStyles, {
+  Colors,
+  TexColor,
+} from "../../components/CommonStyles/CommonStyles";
+import { Color_Button } from "../../components/CommonStyles/CommonButtonStyles";
 import IconSvg from "../../assets/IconSvg";
-import Button from "../CommonComponents/Button";
-import AnotherLoginMethod from "../CommonComponents/AnotherLoginMethod";
+import Button from "../../components/CommonComponents/Button";
+import AnotherLoginMethod from "../../components/CommonComponents/AnotherLoginMethod";
 
 const Loguin = ({ navigation }) => {
   return (

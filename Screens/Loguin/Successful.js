@@ -2,12 +2,14 @@ import React, { useRef } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet, View, Text, TextInput } from "react-native";
 
-import CommonStyles, { Colors } from "../CommonStyles/CommonStyles";
-import CommonSpacingStyles from "../CommonStyles/CommonSpacingStyles";
-import CommonTextStyles from "../CommonStyles/CommonTextStyles";
-import { Color_Button } from "../CommonStyles/CommonButtonStyles";
+import CommonStyles, {
+  Colors,
+} from "../../components/CommonStyles/CommonStyles";
+import CommonSpacingStyles from "../../components/CommonStyles/CommonSpacingStyles";
+import CommonTextStyles from "../../components/CommonStyles/CommonTextStyles";
+import { Color_Button } from "../../components/CommonStyles/CommonButtonStyles";
 
-import Button from "../CommonComponents/Button";
+import Button from "../../components/CommonComponents/Button";
 import IconSvg from "../../assets/IconSvg";
 
 const Successful = ({ navigation }) => {
